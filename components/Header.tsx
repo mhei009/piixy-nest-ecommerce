@@ -4,6 +4,7 @@ import { useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import Image from "next/image";
 import Form from "next/form";
+import { TrolleyIcon } from "@sanity/icons";
 
 
 
@@ -27,8 +28,12 @@ function Header() {
 </Form>
 
 <div>
-    <Link>
+    <Link href="/basket" className="flex-1 relative flex justify-center sm:justify-start sm:flex-none items-center space-x-2 "><TrolleyIcon className="h-6 w-6 text-gray-600"/> 
+    {/* span item count once global state is implemented */}
+    <span>Basket</span>  
     </Link>
+
+    
 </div>
 
         </div>
