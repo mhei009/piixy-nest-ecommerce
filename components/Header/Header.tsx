@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react"; 
+import { useState, useEffect } from "react"; 
 import { ClerkLoaded, SignedIn, SignedOut, SignInButton, UserButton, useUser, useClerk } from "@clerk/nextjs";
 import Link from "next/link";
 import Image from "next/image";
-import { HeartIcon, PackageIcon, SearchIcon, TrolleyIcon, UserIcon, MenuIcon } from "@sanity/icons";
+import { HeartIcon, SearchIcon, TrolleyIcon, UserIcon, MenuIcon } from "@sanity/icons";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,10 +17,25 @@ function Header() {
   const { signOut } = useClerk();
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkIfMobile();
+    window.addEventListener("resize", checkIfMobile);
+
+    return () => window.removeEventListener("resize", checkIfMobile);
+  }, []);
+
+  const hasPasskey = user?.publicMetadata?.hasPasskey || false; 
 
   return (
     <header className="flex justify-between items-center px-4 py-2">
-      {/* left logo */}
+      {/* left side logo */}
       <div className="flex items-center space-x-6">
         <Link href="/">
           <Image
@@ -33,15 +48,16 @@ function Header() {
         </Link>
       </div>
 
-      {/* center nav (hidden on small screens) */}
+      {/* center nav */}
       <div className="hidden md:flex flex-grow justify-center space-x-6">
         <Link href="/" className="font-bold" aria-label="New & Featured products">New & Featured</Link>
         <Link href="/series" aria-label="Browse Product Series" className="font-bold text-gray-700">Series</Link>
         <Link href="/types" aria-label="Browse Accessories" className="font-bold text-gray-700">Accessories</Link>
       </div>
 
+      {/* right nav */}
       <div className="flex items-center space-x-3">
- 
+        {/* search bar toggle */}
         <div className="relative flex items-center justify-center">
           {showSearchBar && (
             <div className="absolute top-0 right-8">
@@ -56,63 +72,47 @@ function Header() {
               </form>
             </div>
           )}
-
           <SearchIcon
             className="h-6 w-6 text-gray-600 cursor-pointer"
-            onClick={() => setShowSearchBar(!showSearchBar)} 
+            onClick={() => setShowSearchBar(!showSearchBar)}
             aria-label="Toggle search bar"
           />
         </div>
 
+        {/* faves */}
         <Link href="/favorites" className="flex items-center space-x-2" aria-label="View Favorites">
           <HeartIcon className="h-6 w-6 text-gray-600" />
         </Link>
 
+        {/* basket */}
         <Link href="/basket" className="flex items-center space-x-2" aria-label="View Shopping basket">
           <TrolleyIcon className="h-6 w-6 text-gray-600" />
         </Link>
 
-        {/* menu icon (visible only on small screens) */}
-        <div className="md:hidden flex items-center space-x-4">
-          <MenuIcon
-            className="h-6 w-6 text-gray-600 cursor-pointer"
-            onClick={() => setShowMobileMenu(!showMobileMenu)}
-            aria-label="Toggle menu"
-          />
-        </div>
-
-        {/* large screen user-profile */}
+        {!isMobile && (
         <ClerkLoaded>
           <SignedIn>
             <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <div className="flex items-center space-x-2 cursor-pointer" aria-label="User account menu">
-                  <UserButton />
-                </div>
+              <DropdownMenuTrigger>
+                <UserButton />
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-48">
-          
+              <DropdownMenuContent align="end">
+              {!hasPasskey && (
+                  <DropdownMenuItem onClick={() => window.location.href = "/setup-passkey"} className="text-red-600">
+                    Set up Passkey
+                  </DropdownMenuItem>
+                )}
                 <DropdownMenuItem asChild>
-                  <Link href="/orders" className="block px-4 py-2 text-gray-700 hover:bg-gray-100" aria-label="My Orders">
-                    My Orders
-                  </Link>
+                  <Link href="/orders">My Orders</Link>
                 </DropdownMenuItem>
-
-                
                 <DropdownMenuItem asChild>
-                  <Link href="/user-profile" className="block px-4 py-2 text-gray-700 hover:bg-gray-100" aria-label="Profile Settings">
-                    Profile Settings
-                  </Link>
+                  <Link href="/user-profile">Profile Settings</Link>
                 </DropdownMenuItem>
-
-             
-                <DropdownMenuItem asChild>
-                  <button
-                    onClick={() => signOut()}
-                    className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100" aria-label="Logout"
-                  >
-                    Logout
-                  </button>
+        
+                <DropdownMenuItem
+                  onClick={() => signOut()}
+                >
+                  Logout
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -126,13 +126,22 @@ function Header() {
             </SignInButton>
           </SignedOut>
         </ClerkLoaded>
+      )}
+
+        {/* menu icon for small screen */}
+        <div className="md:hidden flex items-center space-x-4">
+          <MenuIcon
+            className="h-6 w-6 text-gray-600 cursor-pointer"
+            onClick={() => setShowMobileMenu(!showMobileMenu)}
+            aria-label="Toggle menu"
+          />
+        </div>
       </div>
 
-      {/* mobile menu (shown when showMobileMenu is true) */}
+      {/* mobile menu  in small screen*/}
       {showMobileMenu && (
         <div className="absolute top-0 left-0 right-0 bottom-0 bg-white z-50 md:hidden shadow-md">
           <div className="flex justify-between items-center px-4 py-2">
-           
             <button
               onClick={() => setShowMobileMenu(false)}
               className="h-6 w-6 text-gray-600 ml-auto"
@@ -143,43 +152,48 @@ function Header() {
           </div>
 
          
-          <div className="px-4 py-2 space-y-4">
-            <ClerkLoaded>
-              <SignedIn>
-                <div className="space-y-4">
-                  <div className="flex items-center space-x-2">
-                    <UserButton />
-                    <div className="text-xs text-gray-600">{user?.fullName}</div>
-                  </div>
-
-                  <Link href="/orders" className="block text-gray-700" aria-label="My Orders">My Orders</Link>
-                  <Link href="/user-profile" className="block text-gray-700" aria-label="Profile Settings">Profile Settings</Link>
-                  <button
-                    onClick={() => signOut()}
-                    className="w-full text-left text-gray-700"
-                    aria-label="Logout"
-                  >
-                    Logout
-                  </button>
+          {/* mobile menu clerk*/}
+          <ClerkLoaded>
+            <SignedIn>
+              <div className="space-y-4 px-4 py-2 border-t border-gray-200 mt-4">
+                <div className="flex items-center space-x-2">
+                  <UserButton />
+                  <div className="text-xs text-gray-600">{user?.firstName}</div>
                 </div>
-              </SignedIn>
+                <div>
+                {!hasPasskey && (
+                  <button
+                    onClick={() => window.location.href = "/setup-passkey"} // Example URL for passkey setup
+                    className="block w-full text-left text-red-600  mt-2"
+                    aria-label="Set up Passkey"
+                  >
+                    Set up Passkey
+                  </button>
+                )}
+                <Link href="/orders" className="block text-gray-700" aria-label="My Orders">My Orders</Link>
+                </div>
+              </div>
+            </SignedIn>
 
-              <SignedOut>
-                <SignInButton mode="modal">
-                  <div className="block text-gray-700" aria-label="Sign In">Sign In</div>
-                </SignInButton>
-              </SignedOut>
-            </ClerkLoaded>
-          </div>
-
-          {/*  center nav links inside mobile menu */}
+             {/* mobile menu center nav */}
           <div className="px-4 py-2 space-y-4">
             <Link href="/" className="block text-gray-700" aria-label="New & Featured products">New & Featured</Link>
             <Link href="/series" className="block text-gray-700" aria-label="Browse Product Series">Series</Link>
             <Link href="/types" className="block text-gray-700" aria-label="Browse Accessories">Accessories</Link>
           </div>
+
+
+            <SignedOut>
+              <SignInButton mode="modal">
+                <div className="block text-gray-700" aria-label="Sign In">Sign In</div>
+              </SignInButton>
+            </SignedOut>
+          </ClerkLoaded>
         </div>
       )}
+
+      
+     
     </header>
   );
 }
