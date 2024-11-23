@@ -25,6 +25,8 @@ const createClerkPasskey = async () => {
   }
 } 
 
+const { openUserProfile } = useClerk();
+
   const { signOut } = useClerk();
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
@@ -113,17 +115,19 @@ const createClerkPasskey = async () => {
                     Set up Passkey
                   </DropdownMenuItem>
                 )}
+                
+                <DropdownMenuItem asChild>
+                  <button onClick={(event) => openUserProfile()}>Profile Settings</button>
+                </DropdownMenuItem>
+
                 <DropdownMenuItem asChild>
                   <Link href="/orders">My Orders</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/user-profile">Profile Settings</Link>
-                </DropdownMenuItem>
+                </DropdownMenuItem> 
         
                 <DropdownMenuItem
                   onClick={() => signOut()}
-                >
-                  Logout
+                 className="underline text-gray-700">
+                  Sign Out
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -181,9 +185,21 @@ const createClerkPasskey = async () => {
                     Set up Passkey
                   </button>
                 )}
+                   <button onClick={(event) => openUserProfile()}>Profile Settings</button>
                 <Link href="/orders" className="block text-gray-700" aria-label="My Orders">My Orders</Link>
+                <button
+                    onClick={() => signOut()}
+                    className="block w-full text-left text-gray-700 underline "
+                    aria-label="Sign Out"
+                  >
+                    Sign Out
+                  </button>
                 </div>
+                
+                
               </div>
+
+              
             </SignedIn>
 
              {/* mobile menu center nav */}
