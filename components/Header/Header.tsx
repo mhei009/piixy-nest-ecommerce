@@ -14,6 +14,8 @@ import {
 
 function Header() {
   const { user } = useUser();
+const createClerkPasskey = async () => {} 
+
   const { signOut } = useClerk();
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
@@ -31,7 +33,6 @@ function Header() {
     return () => window.removeEventListener("resize", checkIfMobile);
   }, []);
 
-  const hasPasskey = user?.publicMetadata?.hasPasskey || false; 
 
   return (
     <header className="flex justify-between items-center px-4 py-2">
@@ -41,9 +42,9 @@ function Header() {
           <Image
             src="/assets/icons/logo-full1.webp"
             height={40}
-            width={200}
+            width={120}
             alt="PixyNest logo"
-            className="mx-auto sm:mx-0 sm:h-10 sm:w-auto md:h-10 md:w-auto lg:h-10 lg:w-auto"
+            className="mx-auto sm:mx-0 sm:h-auto sm:w-3 md:h-10 md:w-auto lg:h-10 lg:w-auto"
           />
         </Link>
       </div>
@@ -97,8 +98,9 @@ function Header() {
                 <UserButton />
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-              {!hasPasskey && (
-                  <DropdownMenuItem onClick={() => window.location.href = "/setup-passkey"} className="text-red-600">
+              {user?.passkeys.length === 0 && (
+                  <DropdownMenuItem onClick={createClerkPasskey} 
+                  className="text-red-600">
                     Set up Passkey
                   </DropdownMenuItem>
                 )}
@@ -161,9 +163,9 @@ function Header() {
                   <div className="text-xs text-gray-600">{user?.firstName}</div>
                 </div>
                 <div>
-                {!hasPasskey && (
+                {user?.passkeys.length === 0  && (
                   <button
-                    onClick={() => window.location.href = "/setup-passkey"} // Example URL for passkey setup
+                    onClick={createClerkPasskey}
                     className="block w-full text-left text-red-600  mt-2"
                     aria-label="Set up Passkey"
                   >
