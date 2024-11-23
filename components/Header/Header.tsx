@@ -14,7 +14,16 @@ import {
 
 function Header() {
   const { user } = useUser();
-const createClerkPasskey = async () => {} 
+const createClerkPasskey = async () => {
+  try {
+    const response = await user?.createPasskey();  
+    console.log(response);
+    
+  } catch (err) {
+    console.error("ERROR: ", JSON.stringify(err, null, 2));
+    
+  }
+} 
 
   const { signOut } = useClerk();
   const [showSearchBar, setShowSearchBar] = useState(false);
