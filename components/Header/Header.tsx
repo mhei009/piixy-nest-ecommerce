@@ -170,7 +170,7 @@ const { openUserProfile } = useClerk();
           {/* mobile menu clerk*/}
           <ClerkLoaded>
             <SignedIn>
-              <div className="space-y-4 px-4 py-2 border-t border-gray-200 mt-4">
+              <div className="space-y-4 px-4 py-2  border-gray-200 mt-2">
                 <div className="flex items-center space-x-2">
                   <UserButton />
                   <div className="text-xs text-gray-600">{user?.firstName}</div>
@@ -203,7 +203,7 @@ const { openUserProfile } = useClerk();
             </SignedIn>
 
              {/* mobile menu center nav */}
-          <div className="px-4 py-2 space-y-4">
+          <div className="px-4 py-2 space-y-4 mt-5">
             <Link href="/" className="block text-gray-700" aria-label="New & Featured products">New & Featured</Link>
             <Link href="/series" className="block text-gray-700" aria-label="Browse Product Series">Series</Link>
             <Link href="/types" className="block text-gray-700" aria-label="Browse Accessories">Accessories</Link>
