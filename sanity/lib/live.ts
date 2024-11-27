@@ -4,7 +4,7 @@
 import { defineLive } from "next-sanity";
 import { client } from './client'
 
-const token = process.env.SANITY_API_TOKEN;
+const token = process.env.SANITY_API_READ_TOKEN;
 if (!token) {
   throw new Error('SANITY_API_READ_TOKEN is missing')
 }
@@ -12,7 +12,7 @@ if (!token) {
 
 
 // functionality for fetching data and handling updates.
-// It enables real-time synchronization between the Sanity backend and the frontend.
+// enables real-time synchronization between the Sanity backend and the frontend.
 export const { sanityFetch, SanityLive } = defineLive({ 
   client,
   serverToken: token,
