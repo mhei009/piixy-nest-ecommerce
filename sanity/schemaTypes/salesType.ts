@@ -4,8 +4,8 @@ import { title } from "process";
 import { defineField, defineType } from "sanity";
 
 export const salesType = defineType({
-    name: 'sales',
-    title: 'Sales',
+    name: 'sale',
+    title: 'Sale',
     type: 'document',
     icon: TagIcon,
     fields: [ 
@@ -57,7 +57,7 @@ export const salesType = defineType({
         },
         prepare(selection) {
             const { title, discountAmount, couponCode, isActive } = selection;
-            const status = isActive ? 'Active' : 'Inactive';
+            const status = isActive ? "Active" : "Inactive";
             return {
                 title,
                 subtitle: `${discountAmount}% off - code: ${couponCode} - ${status}`,
