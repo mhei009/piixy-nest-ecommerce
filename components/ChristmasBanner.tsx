@@ -9,7 +9,9 @@ async function ChristmasBanner() {
   }
 
   return (
-    <div className="bg-red-600 text-white px-6 py-10 mx-4 mt-2 rounded-lg shadow-lg">Christmas Sale Banner</div>
+    <div className="bg-red-600 text-white px-6 py-10 mx-4 mt-2 rounded-lg shadow-lg">Christmas Sale Banner
+    <div className=""></div>
+    </div>
   )
 
 }

@@ -411,6 +411,6 @@ declare module "@sanity/client" {
     "\n    *[_type == \"brand\"] | order(name asc)\n  ": ALL_BRAND_QUERYResult;
     "\n    *[\n        _type == \"category\"] | order(name asc)\n        ": ALL_CATEGORIES_QUERYResult;
     "\n    *[\n        _type == \"product\"] | order(name asc)\n        ": ALL_PRODUCTS_QUERYResult;
-    "\n    * [\n        _type == \"sale\" \n        && isActive == true\n        && couponCode == $couponCode\n    ] | order(validFrom desc) [0]\n        ": ACTIVE_SALE_BY_COUPON_QUERYResult;
+    "\n    * [\n        _type == \"sale\" \n        && isActive == true\n        && couponCode == $couponCode\n    ] | order(validFrom desc) [0]\n    ": ACTIVE_SALE_BY_COUPON_QUERYResult;
   }
 }

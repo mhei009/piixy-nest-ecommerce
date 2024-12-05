@@ -2,12 +2,11 @@ import { CouponCode } from "./couponCodes";
 import { sanityFetch } from "../live";
 import { defineQuery } from "next-sanity";
 
-// Define the structure of the Sale object returned by the query
 interface Sale {
   isActive: boolean;
   couponCode: string;
   validFrom: string;
-  // Add any other necessary fields here based on your schema
+  
 }
 
 export const getActiveSaleByCouponCode = async (couponCode: CouponCode): Promise<Sale | null> => {
@@ -28,15 +27,15 @@ export const getActiveSaleByCouponCode = async (couponCode: CouponCode): Promise
             },
         });
 
-        // Ensure the response is properly structured and return the correct data
+        // make sure the response is properly structured and return the correct data
         if (activeSale && activeSale.data) {
             return activeSale.data as Sale;
         } else {
-            return null; // No active sale found
+            return null; 
         }
         
     } catch (error) {
         console.error("Error fetching active sale by coupon code:", error);
-        return null; // Return null in case of an error
+        return null; 
     }
 };
