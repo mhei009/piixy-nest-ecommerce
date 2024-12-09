@@ -6,6 +6,10 @@ interface Sale {
   isActive: boolean;
   couponCode: string;
   validFrom: string;
+  title: string;
+  description: string;
+  discount: number;
+ 
   
 }
 
