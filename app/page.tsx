@@ -14,6 +14,9 @@ export default async function Home() {
 
   return (
     <div>
+
+
+      
       <h1>Landing Page Hero
         
       </h1>
@@ -22,6 +25,7 @@ export default async function Home() {
 
 
       <div>
+        
         
       
       </div>
@@ -32,5 +36,6 @@ export default async function Home() {
 </div>
       
     </div>
+    
   );
 }
