@@ -3,6 +3,7 @@ import getProductBySlug from "@/sanity/lib/products/getProductBySlug";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { PortableText } from "next-sanity";
+import { Button } from "@/components/ui/button";
 
 async function ProductPage({
   params,
@@ -54,6 +55,10 @@ async function ProductPage({
               )}
             </div>
           </div>
+<div className="mt-3">
+  <Button>Add to Basket</Button>
+</div>
+          
         </div>
       </div>
     </div>
