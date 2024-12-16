@@ -7,7 +7,7 @@ import { PortableText } from "next-sanity";
 async function ProductPage({
   params,
 }: {
-  params: { slug: string }; 
+  params: { slug: string }; // Fixed the typing for params
 }) {
   const { slug } = params;
   const product = await getProductBySlug(slug);
