@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import { PortableText } from "next-sanity";
 import { Button } from "@/components/ui/button";
+import AddToBasketButton from "@/components/AddToBasketButton";
 
 async function ProductPage({
   params,
@@ -56,7 +57,8 @@ async function ProductPage({
             </div>
           </div>
 <div className="mt-3">
-  <Button>Add to Basket</Button>
+  <AddToBasketButton product={product}  disabled={isOutOfStock}/>
+
 </div>
           
         </div>
