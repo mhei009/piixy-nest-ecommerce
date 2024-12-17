@@ -45,7 +45,7 @@ const useBasketStore = create<BasketState>()(
                         if (item.quantity > 1) {
                             acc.push({ ...item, quantity: item.quantity - 1 });
                         }
-                        // If the quantity is 1, we remove the item entirely
+                        // iif the quantity is 1 remove the item entirely
                     } else {
                         acc.push(item);
                     }
