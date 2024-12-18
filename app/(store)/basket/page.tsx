@@ -40,7 +40,17 @@ function BasketPage() {
     );
   }
 
-  const handleCheckout = async () => {}
+  const handleCheckout = async () => {
+    if (!isSignedIn) return;
+    setIsLoading(true);
+
+    try {
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   
 
