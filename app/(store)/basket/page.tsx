@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import useBasketStore from "../store";
-import { useAuth, useUser } from "@clerk/nextjs";
+import { SignInButton, useAuth, useUser } from "@clerk/nextjs";
 import { useState, useEffect } from "react";
 import AddToBasketButton from "@/components/AddToBasketButton";
 import { imageUrl } from "@/sanity/lib/imageUrl";
@@ -19,6 +19,7 @@ function BasketPage() {
 
   // state where to manage whether client-side rendering is done
   const [isClient, setIsClient] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   // if on mount, set isClient to true to ensure client-side rendering
   useEffect(() => {
@@ -38,6 +39,10 @@ function BasketPage() {
       </div>
     );
   }
+
+  const handleCheckout = async () => {}
+
+  
 
   return (
     <div className="container mx-auto p-4 max-w-4xl">
@@ -60,6 +65,7 @@ function BasketPage() {
                       src={imageUrl(item.product.image).url()}
                       alt={item.product.name ?? "Product image"}
                       className="w-full h-full object-cover"
+                      loading="lazy"
                       width={100}
                       height={100}
                     />
@@ -81,10 +87,42 @@ function BasketPage() {
           ))}
         </div>
 
-        {/* sticky for Order Summary Div */}
+        {/* sticky for order summary Div */}
         <div className="w-full lg:w-80 p-6 h-fit border rounded lg:sticky lg:top-4 lg:left-auto lg:ml-8 mt-4 lg:mt-0 order-last lg:order-last">
           <h3 className="text-lg">Order Summary</h3>
-          {/* order summary details here */}
+         <div className="mt-4 space-y-2">
+          <p className="flex justify-between">
+            <span>Items:</span>
+            <span>
+              {groupedItems.reduce((total, item) => total + item.quantity, 0)}
+            </span>
+          </p>
+          <p className="flex justify-between text-1xl font-semibold border-t pt-2">
+            <span>Total:</span>
+            <span>{useBasketStore.getState().getTotalPrice().toFixed(2)} SEK</span>
+          </p>
+         </div>
+
+         {isSignedIn ? (
+          <button
+          onClick={handleCheckout}
+          disabled={isLoading}
+          className="mt-4 w-full bg-gray-800 text-white rounded p-2"
+        >
+          {isLoading ? "Processing..." : "Checkout"}
+        </button>
+        
+         ) : (
+          <SignInButton mode="modal">
+            <button className="w-full py-2 rounded">Sign In to Checkout
+            </button>
+          </SignInButton>
+         )}
+        
+        </div>  
+        {/* order summary space */}
+        <div className="h-64 lg:h-0">
+
         </div>
       </div>
     </div>
