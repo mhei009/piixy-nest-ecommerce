@@ -21,8 +21,8 @@ export const orderType = defineType({
       type: "string",
     }),
     defineField({
-      name: "stripeCostumerId",
-      title: "Stripe Costumer ID",
+      name: "stripeCustomerId",
+      title: "Stripe Customer ID",
       type: "string",
       validation: (Rule) => Rule.required(),
     }),
@@ -33,14 +33,14 @@ export const orderType = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: "costumerName",
-      title: "Costumer Name",
+      name: "customerName",
+      title: "Customer Name",
       type: "string",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "email",
-      title: "Costumer Email",
+      title: "Customer Email",
       type: "string",
       validation: (Rule) => Rule.required(),
     }),
@@ -130,7 +130,7 @@ export const orderType = defineType({
   ],
     preview: {
         select: {
-        name: "costumerName",
+        name: "customerName",
         amount: "totalPrice",
         currency: "currency",
         orderId: "orderNumber",

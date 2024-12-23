@@ -91,9 +91,9 @@ export type Order = {
   _rev: string;
   orderNumber?: string;
   stripeCheckoutSessionId?: string;
-  stripeCostumerId?: string;
+  stripeCustomerId?: string;
   clerkUserId?: string;
-  costumerName?: string;
+  customerName?: string;
   email?: string;
   stripePaymentIntentId?: string;
   products?: Array<{
@@ -388,7 +388,7 @@ export type ALL_PRODUCTS_QUERYResult = Array<{
 
 // Source: ./sanity/lib/products/getProductBySlug.ts
 // Variable: PRODUCT_BY_ID_QUERY
-// Query: *[         _type == "product" && slug.current == $slug ]        | order(name asc) [0]
+// Query: *[        _type == "product" && slug.current == $slug ] | order(name asc)[0]
 export type PRODUCT_BY_ID_QUERYResult = {
   _id: string;
   _type: "product";
@@ -561,7 +561,7 @@ declare module "@sanity/client" {
     "\n    *[_type == \"brand\"] | order(name asc)\n  ": ALL_BRAND_QUERYResult;
     "\n    *[\n        _type == \"category\"] | order(name asc)\n        ": ALL_CATEGORIES_QUERYResult;
     "\n    *[\n        _type == \"product\"] | order(name asc)\n        ": ALL_PRODUCTS_QUERYResult;
-    "\n    *[ \n        _type == \"product\" && slug.current == $slug ]\n        | order(name asc) [0]\n        ": PRODUCT_BY_ID_QUERYResult;
+    "\n    *[\n        _type == \"product\" && slug.current == $slug ] | order(name asc)[0]\n        ": PRODUCT_BY_ID_QUERYResult;
     "\n    *[\n        _type == \"product\"\n        && name match $searchParam\n    ] | order(name asc)\n    ": PRODUCT_SEARCH_QUERYResult;
     "\n    * [\n        _type == \"sale\" \n        && isActive == true\n        && couponCode == $couponCode\n    ] | order(validFrom desc) [0]\n    ": ACTIVE_SALE_BY_COUPON_QUERYResult;
   }

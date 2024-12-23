@@ -460,7 +460,7 @@
         },
         "optional": true
       },
-      "stripeCostumerId": {
+      "stripeCustomerId": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
@@ -474,7 +474,7 @@
         },
         "optional": true
       },
-      "costumerName": {
+      "customerName": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
