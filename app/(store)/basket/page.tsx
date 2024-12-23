@@ -1,13 +1,16 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import useBasketStore from "../store";
+import useBasketStore from "../../../store/store";
 import { SignInButton, useAuth, useUser } from "@clerk/nextjs";
 import { useState, useEffect } from "react";
 import AddToBasketButton from "@/components/AddToBasketButton";
-import { imageUrl } from "@/sanity/lib/imageUrl";
+import { imageUrl } from "@/lib/imageUrl";
 import Image from "next/image";
 import Loader from "@/components/Loader"; 
+import { createCheckoutSession, Metadata } from "@/actions/createCheckoutSession";
+
+
 
 function BasketPage() {
   // stores state for grouped items
@@ -45,8 +48,21 @@ function BasketPage() {
     setIsLoading(true);
 
     try {
+const metadata: Metadata = {
+  orderNumber: crypto.randomUUID(),
+  costumerName: user?.fullName ?? "Unknown",
+  costumerEmail: user?.emailAddresses[0].emailAddress ?? "Unknown",
+  clerkUserId: user!.id,
+}
+
+const checkoutUrl = await createCheckoutSession(groupedItems, metadata);
+
+if (checkoutUrl) {
+  window.location.href = checkoutUrl;
+}
+
     } catch (error) {
-      console.error(error)
+      console.error("error creating checkout-session", error)
     } finally {
       setIsLoading(false);
     }
@@ -124,7 +140,7 @@ function BasketPage() {
         
          ) : (
           <SignInButton mode="modal">
-            <button className="w-full py-2 rounded">Sign In to Checkout
+            <button className="w-full py-2 rounded bg-black text-white mt-2">Sign In to Checkout
             </button>
           </SignInButton>
          )}

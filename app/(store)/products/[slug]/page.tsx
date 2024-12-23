@@ -1,4 +1,4 @@
-import { imageUrl } from "@/sanity/lib/imageUrl";
+import { imageUrl } from "@/lib/imageUrl";
 import getProductBySlug from "@/sanity/lib/products/getProductBySlug";
 import { notFound } from "next/navigation";
 import Image from "next/image";

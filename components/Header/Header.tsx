@@ -19,7 +19,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import useBasketStore from "@/app/(store)/store";
+import useBasketStore from "@/store/store";
 
 function Header() {
   const { user } = useUser();
