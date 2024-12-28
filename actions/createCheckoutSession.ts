@@ -48,8 +48,8 @@ const session = await stripe.checkout.sessions.create({
     metadata,
     mode: "payment",
     allow_promotion_codes: true,
-    success_url: `${process.env.VERCEL_URL || process.env.NEXT_PUBLIC_VERCEL_URL}/success?session_id={CHECKOUT_SESSION_ID}&orderNumber=${metadata.orderNumber}`,
-    cancel_url: `${process.env.VERCEL_URL || process.env.NEXT_PUBLIC_VERCEL_URL}/basket`,
+    success_url: `${`https://${process.env.VERCEL_URL}` || process.env.NEXT_PUBLIC_BASE_URL}/success?session_id={CHECKOUT_SESSION_ID}&orderNumber=${metadata.orderNumber}`,
+    cancel_url: `${`https://${process.env.VERCEL_URL}` || process.env.NEXT_PUBLIC_BASE_URL}/basket`,
     line_items: items.map((item) => ({
 price_data: {
     currency: "sek",
