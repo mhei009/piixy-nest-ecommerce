@@ -1,5 +1,6 @@
 "use server"
 
+import { imageUrl } from "@/lib/imageUrl";
 import stripe from "@/lib/stripe";
 import { BasketItem } from "@/store/store";
 
@@ -44,7 +45,36 @@ const session = await stripe.checkout.sessions.create({
     customer: customerId,
     customer_creation: customerId ? undefined: "always",
     customer_email: !customerId ? metadata.customerEmail: undefined,
-})
+    metadata,
+    mode: "payment",
+    allow_promotion_codes: true,
+    success_url: `${process.env.VERCEL_URL || process.env.NEXT_PUBLIC_VERCEL_URL}/success?session_id={CHECKOUT_SESSION_ID}&orderNumber=${metadata.orderNumber}`,
+    cancel_url: `${process.env.VERCEL_URL || process.env.NEXT_PUBLIC_VERCEL_URL}/basket`,
+    line_items: items.map((item) => ({
+price_data: {
+    currency: "sek",
+
+    unit_amount: Math.round(item.product.price! * 100),
+    product_data: {
+        name: item.product.name || "Unnamed Product",
+        description: `Product ID: ${item.product._id}`,
+        metadata: {
+            id: item.product._id,
+        },
+        images: item.product.image
+        ? [imageUrl(item.product.image).url()]
+        : undefined,
+},
+},
+
+        quantity: item.quantity,
+
+    })),
+
+
+
+});
+return session.url;
 
 
     } catch (error) {
