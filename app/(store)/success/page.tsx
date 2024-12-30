@@ -20,7 +20,7 @@ function SuccessPage() {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-50">
-      <div className="bg-white p-12 rounded-lg shadow-lg max-w-xl w-full mx-4">
+      <div className="bg-white p-8 sm:p-12 rounded-lg shadow-lg max-w-3xl w-full mx-4">
         <div className="flex justify-center mb-8">
           <div className="h-16 w-16 bg-green-100 rounded-full flex items-center justify-center">
             <svg
@@ -46,38 +46,40 @@ function SuccessPage() {
             Your order has been successfully placed and will be processed soon.
           </p>
 
-          <div className="space-y-2 mt-10">
+          <div className="mt-10 space-y-4">
             {orderNumber && (
-              <p className="text-gray-600 flex items-center justify-center space-x-5 mb-5">
-                <span className="font-semibold">Order number:</span> 
-                <span className="text-green-600">{orderNumber}</span>
-              </p>
+              <div className="grid grid-cols-2 gap-4 items-center">
+                <span className="text-gray-700 font-semibold">Order Number:</span>
+                <span className="text-green-600 text-left break-all ">
+                  {orderNumber}
+                </span>
+              </div>
             )}
             {sessionId && (
-              <p className="text-gray-600 flex items-center justify-center space-x-6">
-                <span className="font-semibold flex">Transaction ID:</span>
-                <span className="font-mono text-sm truncate flex" title={sessionId}>
+              <div className="grid grid-cols-2 gap-4 items-center">
+                <span className="text-gray-700 font-semibold">
+                  Transaction ID:
+                </span>
+                <span className="text-gray-800 font-mono text-left break-all text-sm">
                   {sessionId}
                 </span>
-              </p>
+              </div>
             )}
           </div>
-          
-           <div className="space-y-4 mt-10">
-          <p className="text-gray-600">
-            A confirmation email has been sent to your email address.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Button asChild className="bg-green-600 hover:bg-green-700">
-              <Link href="/orders">View Order Details</Link>
-            </Button>
-            <Button asChild variant="outline">
-              <Link href="/">Continue Shopping</Link>
-            </Button>
-          </div>
-        </div>
 
-       
+          <div className="space-y-6 mt-10">
+            <p className="text-gray-600">
+              A confirmation email has been sent to your email address.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button asChild className="bg-green-600 hover:bg-green-700">
+                <Link href="/orders">View Order Details</Link>
+              </Button>
+              <Button asChild variant="outline">
+                <Link href="/">Continue Shopping</Link>
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
