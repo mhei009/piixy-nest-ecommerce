@@ -1,5 +1,6 @@
 import { Metadata } from "@/actions/createCheckoutSession";
 import stripe from "@/lib/stripe";
+import { backendClient } from "@/sanity/lib/backendClient";
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
@@ -93,6 +94,28 @@ async function createOrderInSanity(session: Stripe.Checkout.Session) {
             _ref: (item.price?.product as Stripe.Product).metadata?.id,
         },
         quantity: item.quantity || 0,
+    }) )
+
+    const order = await backendClient.create({
+        _type: "order",
+        orderNumber,
+      stripeCheckoutSessionId: id,
+      stripePaymentIntentId: payment_intent,
+      customerName,
+      stripeCustomerId: customer,
+      clerkUserId: clerkUserId,
+      email: customerEmail,
+      currency,
+      amountDiscount: total_details?.amount_discount
+      ? total_details.amount_discount / 100
+      : 0,
+
+      products: sanityProducts,
+      totalPrice: amount_total ? amount_total / 100 : 0,
+      status: "paid",
+      orderDate: new Date().toISOString(),
+        
     })
-    )
+
+    return order;
 }
