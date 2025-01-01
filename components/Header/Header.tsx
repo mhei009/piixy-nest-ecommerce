@@ -134,7 +134,7 @@ function Header() {
                     Profile Settings
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link href="/orders">My Orders</Link>
+                    <Link href="/order">My Orders</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem onClick={() => signOut()} className="text-gray-700 underline">
                     Sign Out
@@ -190,7 +190,7 @@ function Header() {
                   </button>
                 )}
                 <button onClick={() => openUserProfile()}>Profile Settings</button>
-                <Link href="/orders">My Orders</Link>
+                <Link href="/order">My Orders</Link>
                 <button onClick={() => signOut()} className="text-gray-700 underline">
                   Sign Out
                 </button>
