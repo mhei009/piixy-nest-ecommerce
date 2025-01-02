@@ -21,13 +21,13 @@ export async function createCheckoutSession(
     metadata: Metadata
 ) {
     try {
-        // Check if any items don't have a price
+        // checks if any items don't have a price
         const itemsWithoutPrice = items.filter((item) => !item.product.price);
         if (itemsWithoutPrice.length > 0) {
             throw new Error("Some items are missing a price");
         }
         
-        // Fetch existing Stripe customer based on email
+        // fetxh Stripe customer based on email
         const customers = await stripe.customers.list({
             email: metadata.customerEmail,
             limit: 1
@@ -38,7 +38,7 @@ export async function createCheckoutSession(
             customerId = customers.data[0].id;
         }
 
-        // Base URL for success and cancel pages
+        // base url for success and cancel pages
         const baseUrl = process.env.NODE_ENV === "production"
             ? `https://${process.env.VERCEL_URL}`
             : `${process.env.NEXT_PUBLIC_BASE_URL}`;
@@ -46,7 +46,7 @@ export async function createCheckoutSession(
         const successUrl = `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}&orderNumber=${metadata.orderNumber}`;
         const cancelUrl = `${baseUrl}/basket`;
 
-        // Create Stripe Checkout session
+        // creates Stripe Checkout session
         const session = await stripe.checkout.sessions.create({
             customer: customerId,
             customer_creation: customerId ? undefined : "always", // create customer if not found
@@ -75,7 +75,7 @@ export async function createCheckoutSession(
             })),
         });
 
-        //  URL to redirect the user to
+        //   to redirect the user to
         return session.url;
 
     } catch (error) {

@@ -11,7 +11,7 @@ import {
   useClerk,
 } from "@clerk/nextjs";
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/image";  // This is the Next.js Image component
 import { HeartIcon, SearchIcon, TrolleyIcon, UserIcon, MenuIcon } from "@sanity/icons";
 import {
   DropdownMenu,
@@ -51,18 +51,18 @@ function Header() {
 
   return (
     <header className="flex justify-between items-center px-7 py-2">
-    {/* left side logo */}
-    <div className="flex items-center space-x-6">
-      <Link href="/">
-        <Image
-          src="/assets/icons/logo-full1.webp"
-          height={40}
-          width={120}
-          alt="PixyNest logo"
-          className="mx-auto sm:mx-0 sm:h-auto sm:w-3 md:h-10 md:w-auto lg:h-10 lg:w-auto"
-        />
-      </Link>
-    </div>
+      {/* Left side logo */}
+      <div className="logo__container">
+        <Link href="/">
+    
+          <Image
+            src="/assets/icons/logo-full1.webp"
+            alt="PixyNest logo"
+            width={128}   
+            height={40}   
+          />
+        </Link>
+      </div>
 
       {/* Center Navigation */}
       <nav className="hidden md:flex flex-grow justify-center space-x-6">

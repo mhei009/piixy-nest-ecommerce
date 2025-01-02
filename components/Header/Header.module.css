@@ -1,62 +1,48 @@
-/* Header.module.css */
-
 /* Header container styling */
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5rem 1rem;
-  }
-  
-  /* Logo container styling */
-  .logo__container {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-  }
-  
-  /* Full logo styling */
-  .logo__full {
-    max-height: 40px; /* Logo height */
-    width: auto;
-  }
-  
-  /* Navigation links container */
-  .nav__links {
-    display: flex;
-    flex-grow: 1;
-    justify-content: center;
-    gap: 1.5rem;
-  }
-  
-  /* Individual navigation link styling */
-  .nav__link {
-    font-weight: bold;
-    color: #4a4a4a; /* Gray color */
-    text-decoration: none;
-  }
-  
-  /* Navigation link hover effect */
-  .nav__link:hover {
-    color: #333; /* Darker gray on hover */
-  }
-  
-  /* Icons container */
-  .icons__container {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-  }
-  
-  /* Icon button styling */
-  .icon__button {
-    width: 24px;
-    height: 24px;
-    color: #4a4a4a;
-    cursor: pointer;
-  }
-  
-  .icon__button:hover {
-    color: #333; /* Change icon color on hover */
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+}
+
+
+
+/* Navigation links container */
+.nav__links {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+/* Individual navigation link styling */
+.nav__link {
+  font-weight: bold;
+  color: #4a4a4a; /* Gray color */
+  text-decoration: none;
+}
+
+/* Navigation link hover effect */
+.nav__link:hover {
+  color: #333; /* Darker gray on hover */
+}
+
+/* Icons container */
+.icons__container {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+/* Icon button styling */
+.icon__button {
+  width: 24px;
+  height: 24px;
+  color: #4a4a4a;
+  cursor: pointer;
+}
+
+.icon__button:hover {
+  color: #333;
+}
