@@ -1,10 +1,12 @@
+// ProductPage.tsx
 import { imageUrl } from "@/lib/imageUrl";
 import getProductBySlug from "@/sanity/lib/products/getProductBySlug";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { PortableText } from "next-sanity";
-import { Button } from "@/components/ui/button";
 import AddToBasketButton from "@/components/AddToBasketButton";
+import HeartButton from "@/components/ProductThumb/HeartButton/HeartButton";
+
 
 async function ProductPage({
   params,
@@ -23,6 +25,7 @@ async function ProductPage({
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Product Image Section */}
         <div
           className={`relative aspect-square overflow-hidden rounded-lg shadow-lg ${
             isOutOfStock ? "opacity-50" : ""
@@ -44,6 +47,7 @@ async function ProductPage({
           )}
         </div>
 
+        {/* Product Details Section */}
         <div className="flex flex-col justify-between">
           <div>
             <h1 className="text-3xl font-bold">{product.name}</h1>
@@ -55,12 +59,16 @@ async function ProductPage({
                 <PortableText value={product.description} />
               )}
             </div>
-          </div>
-<div className="mt-3">
-  <AddToBasketButton product={product}  disabled={isOutOfStock}/>
 
-</div>
-          
+            {/* Heart Icon to Save/Unsave */}
+            <HeartButton product={product} />
+
+          </div>
+
+          {/* Add to Basket Button */}
+          <div className="mt-3">
+            <AddToBasketButton product={product} disabled={isOutOfStock} />
+          </div>
         </div>
       </div>
     </div>

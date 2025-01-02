@@ -1,5 +1,5 @@
 
-import { imageUrl } from "@/lib/imageUrl"; // Adjust imageUrl import path
+import { imageUrl } from "@/lib/imageUrl"; 
 
 import Image from "next/image";
 import { notFound } from "next/navigation";

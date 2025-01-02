@@ -100,7 +100,7 @@ function Header() {
         </div>
 
         {/* Favorites */}
-        <Link href="/favorites" aria-label="View Favorites">
+        <Link href="/saved" aria-label="View saved items">
           <HeartIcon className="h-8 w-8 text-gray-600" />
         </Link>
 
