@@ -5,21 +5,21 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getProductsBySeriesName } from "@/sanity/lib/series/getProductsBySeriesName";
 
-// Define the Product type
+
 type Product = {
   _id: string;
   name: string;
   price: number;
   stock: number;
-  description: any; // Adjust based on your actual description field type
+  description: any; 
   image: { asset: { url: string } };
 };
 
 async function LabubuSeriesPage() {
-  // Fetch all products related to Labubu series
+  // fetch all products related to labubu
   const products = await getProductsBySeriesName("Labubu");
 
-  // If no products are found, return a notFound page
+  
   if (products.length === 0) {
     return notFound();
   }
