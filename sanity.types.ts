@@ -183,6 +183,24 @@ export type Product = {
     [internalGroqTypeReferenceTo]?: "category";
   }>;
   stock?: number;
+  series?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "series";
+  };
+};
+
+export type Series = {
+  _id: string;
+  _type: "series";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  slug?: Slug;
+  description?: string;
+  creatorName?: string;
 };
 
 export type Category = {
@@ -290,7 +308,7 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Sale | Order | Product | Category | Slug | BlockContent | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Sale | Order | Product | Series | Category | Slug | BlockContent | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./sanity/lib/orders/getMyOrders.tsx
 // Variable: MY_ORDERS_QUERY
@@ -379,6 +397,12 @@ export type MY_ORDERS_QUERYResult = Array<{
         [internalGroqTypeReferenceTo]?: "category";
       }>;
       stock?: number;
+      series?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "series";
+      };
     } | null;
     quantity?: number;
     _key: string;
@@ -482,6 +506,12 @@ export type ALL_PRODUCTS_QUERYResult = Array<{
     [internalGroqTypeReferenceTo]?: "category";
   }>;
   stock?: number;
+  series?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "series";
+  };
 }>;
 
 // Source: ./sanity/lib/products/getProductBySlug.ts
@@ -557,6 +587,12 @@ export type PRODUCT_BY_ID_QUERYResult = {
     [internalGroqTypeReferenceTo]?: "category";
   }>;
   stock?: number;
+  series?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "series";
+  };
 } | null;
 
 // Source: ./sanity/lib/products/searchProductsByName.ts
@@ -632,6 +668,12 @@ export type PRODUCT_SEARCH_QUERYResult = Array<{
     [internalGroqTypeReferenceTo]?: "category";
   }>;
   stock?: number;
+  series?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "series";
+  };
 }>;
 
 // Source: ./sanity/lib/sale/getActiveSaleByCouponCode.ts
@@ -652,6 +694,16 @@ export type ACTIVE_SALE_BY_COUPON_QUERYResult = {
   isActive?: boolean;
 } | null;
 
+// Source: ./sanity/lib/series/getLabubuSeries.ts
+// Variable: LABUBU_SERIES_QUERY
+// Query: *[_type == "series" && name == "Labubu"]{      _id,      name,      description,      products[]-> {        _id,        name,        price,        slug,        image      }    }
+export type LABUBU_SERIES_QUERYResult = Array<{
+  _id: string;
+  name: string | null;
+  description: string | null;
+  products: null;
+}>;
+
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
@@ -663,5 +715,6 @@ declare module "@sanity/client" {
     "\n    *[\n        _type == \"product\" && slug.current == $slug ] | order(name asc)[0]\n        ": PRODUCT_BY_ID_QUERYResult;
     "\n    *[\n        _type == \"product\"\n        && name match $searchParam\n    ] | order(name asc)\n    ": PRODUCT_SEARCH_QUERYResult;
     "\n    * [\n        _type == \"sale\" \n        && isActive == true\n        && couponCode == $couponCode\n    ] | order(validFrom desc) [0]\n    ": ACTIVE_SALE_BY_COUPON_QUERYResult;
+    "\n    *[_type == \"series\" && name == \"Labubu\"]{\n      _id,\n      name,\n      description,\n      products[]-> {\n        _id,\n        name,\n        price,\n        slug,\n        image\n      }\n    }\n  ": LABUBU_SERIES_QUERYResult;
   }
 }
