@@ -569,7 +569,7 @@
         },
         "optional": true
       },
-      "amountDiscounted": {
+      "amountDiscount": {
         "type": "objectAttribute",
         "value": {
           "type": "number"
