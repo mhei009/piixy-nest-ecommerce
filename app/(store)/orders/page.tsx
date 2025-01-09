@@ -1,7 +1,9 @@
 import { formatCurrency } from "@/lib/formatCurrency";
+import { imageUrl } from "@/lib/imageUrl";
 import { getMyOrders } from "@/sanity/lib/orders/getMyOrders";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import Image from "next/image";
 
 async function Orders() {
     const { userId } = await auth();
@@ -29,8 +31,9 @@ async function Orders() {
                                 key={order.orderNumber}
                                 className="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden"
                             >
+                                {/* Order Number and Status Section */}
                                 <div className="p-4 sm:p-6 border-gray-200">
-                                    <div className="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center mb-4">
+                                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4">
                                         <div>
                                             <p className="text-sm text-gray-600 mb-1 font-semibold">
                                                 Order Number
@@ -39,41 +42,96 @@ async function Orders() {
                                                 {order.orderNumber}
                                             </p>
                                         </div>
-                                        <div className="sm:text-right">
+                                        <div className="sm:text-right mt-4 sm:mt-0">
                                             <p className="text-sm text-gray-600 mb-1 font-semibold">
-                                                Order Date
+                                                Payment Status
                                             </p>
-                                            <p className="font-medium">
-                                                {order.orderDate
-                                                    ? new Date(order.orderDate).toLocaleDateString()
-                                                    : "N/A"}
-                                            </p>
+                                            <span
+                                                className={`px-3 py-1 rounded-full text-sm ${
+                                                    order.status === "paid"
+                                                        ? "bg-green-100 text-green-800"
+                                                        : "bg-gray-100 text-gray-800"
+                                                }`}
+                                            >
+                                                {order.status}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
-                                
-                                <div className="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center>">
-                                    <div className="flex items-center">
-                                        <span className="text-sm mr-2">Status</span>
-                                        <span className={`px-3 py-1 rounded-full text-sm ${order.status === "paid"
-                                            ? "bg-green-100 text-green-800"
-                                            : "bg-gray-100 text-gray-800"
-                                        }`}>
-                                            {order.status}
-                                        </span>
-                               
 
-                                        </div>
-                                        <div className="sm:text-right">
-                                            <p className="text-sm text-gray-600 mb-1">Total Amount</p>
-                                            
-                                            <p className="font-bold text-lg">{formatCurrency(order.totalPrice ?? 0, order.currency)}
+                                {/* Order Items Section (Moved Above Receipt Style) */}
+                                <div className="px-4 py-3 sm:px-6 sm:py-4">
+                                    <p className="text-sm font-semibold text-gray-600 mb-3 sm:mb-4">
+                                        Order Items
+                                    </p>
+                                    <div className="space-y-3 sm:space-x-4">
+                                        {order.products?.map((product) => (
+                                            <div
+                                                key={product.product?._id}
+                                                className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 py-2 border-b last:border-b-0"
+                                            >
+                                                <div className="flex items-center gap-3 sm:gap-4">
+                                                    {product.product?.image && (
+                                                        <div className="relative w-14 h-14 sm:w-16 sm:h-20 flex-shrink-0 rounded-md overflow-hidden">
+                                                           <Image
+    src={imageUrl(product.product.image).url()}
+    alt={product.product?.name ?? ""}
+    className="object-cover"
+    fill
+    sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+/>
+                                                        </div>
+                                                    )}
 
-                                            </p>
+                                                    <div>
+                                                        <p className="text-sm font-semibold sm:text-base">
+                                                            {product.product?.name}
+                                                        </p>
+
+                                                        <p className="text-sm text-gray-600">
+                                                            Quantity: {product.quantity ?? "N/A"}
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                <p className="font-medium text-right">
+                                                    {product.product?.price && product.quantity
+                                                        ? formatCurrency(
+                                                              product.product.price * product.quantity,
+                                                              order.currency
+                                                          )
+                                                        : "N/A"}
+                                                </p>
                                             </div>
-
+                                        ))}
                                     </div>
-                                
+                                </div>
+
+                                {/* Receipt Style Section for Subtotal, Discount, and Total */}
+                                <div className="p-4 sm:p-6 border-gray-200 mt-6 border-t pt-4">
+                                    <div className="flex justify-between items-center">
+                                        <span className="text-sm text-gray-600">Original Subtotal</span>
+                                        <span className="font-medium text-lg">
+                                            {formatCurrency((order.totalPrice ?? 0) + (order.amountDiscount ?? 0), order.currency)}
+                                        </span>
+                                    </div>
+
+                                    {order.amountDiscount ? (
+                                        <div className="flex justify-between items-center mt-2">
+                                            <span className="text-sm text-red-500">Discount Applied</span>
+                                            <span className="font-medium text-lg text-red-500">
+                                                {formatCurrency(order.amountDiscount, order.currency)}
+                                            </span>
+                                        </div>
+                                    ) : null}
+
+                                    <div className="flex justify-between items-center mt-2">
+                                        <span className="text-sm font-semibold">Total Amount</span>
+                                        <span className="font-bold text-lg">
+                                            {formatCurrency(order.totalPrice ?? 0, order.currency)}
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                         ))}
                     </div>

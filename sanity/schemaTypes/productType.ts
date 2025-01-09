@@ -1,6 +1,6 @@
-
 import { TrolleyIcon } from '@sanity/icons';
 import { defineField, defineType } from 'sanity';
+import { seriesType } from './seriesType';  // Make sure to import the seriesType
 
 export const productType = defineType({
   name: 'product',
@@ -66,20 +66,27 @@ export const productType = defineType({
       type: 'number',
       validation: (Rule) => Rule.required().min(0),
     }),
-  
+    defineField({
+      name: 'series',  // This is the new field to reference a Series
+      title: 'Series',
+      type: 'reference',
+      to: [{ type: 'series' }],  // Reference the 'series' document
+      validation: (Rule) => Rule.required(),  // You can make it optional by removing .required() if needed
+    }),
   ],
   preview: {
     select: {
       title: 'name',
       media: 'image',
       price: 'price',
-     
+      series: 'series.name',  // This selects the series name to display in the preview
     },
     prepare(select) {
+      const { title, price, media, series } = select;
       return {
-        title: select.title,
-        subtitle: `${select.price} SEK`,
-        media: select.media,
+        title,
+        subtitle: series ? `${title} - Series: ${series}` : `${price} SEK`,
+        media,
       };
     },
   },
