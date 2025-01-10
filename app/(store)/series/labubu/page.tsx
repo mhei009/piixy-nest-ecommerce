@@ -3,7 +3,7 @@ import { imageUrl } from "@/lib/imageUrl"; // Adjust imageUrl import path
 
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { getProductsBySeriesName } from "@/sanity/lib/series/getProductsBySeriesName";
+import { getProductsBySeriesName } from "@/sanity/lib/products/getProductsBySeriesName";
 
 
 type Product = {
