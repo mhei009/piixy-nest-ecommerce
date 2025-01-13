@@ -1,12 +1,12 @@
 import { defineQuery } from 'next-sanity';
-import { sanityFetch } from '../live'; 
+import { sanityFetch } from '../live';
 
-export const getProductsBySeriesName = async (seriesName: string) => {
+export const getProductBySeries = async (seriesName: string) => {
   const PRODUCTS_BY_SERIES_QUERY = defineQuery(`
     *[
       _type == "product" &&
       references(*[_type == "series" && name == $seriesName]._id)
-    ] {
+    ] | order(name asc) {
       _id,
       name,
       price,

@@ -18,6 +18,12 @@ const ProductsView = ({ products, categories }: ProductsViewProps) => {
         <CategorySelectorComponent categories={categories} />
        </div> 
 
+       
+{/* <div className="flex-1">
+    <SeriesSelectorComponent series={series} />
+    </div> */}
+
+
 
     <div>
         {/* products */}
