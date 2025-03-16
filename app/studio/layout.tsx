@@ -13,7 +13,7 @@ export const metadata = {
 
 
     return (
-      <html lang="en">
+      <html lang="elayout.tsn">
         <body>
           {children}
         </body>

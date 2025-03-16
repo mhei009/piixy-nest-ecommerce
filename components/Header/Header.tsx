@@ -11,7 +11,7 @@ import {
   useClerk,
 } from "@clerk/nextjs";
 import Link from "next/link";
-import Image from "next/image";  // This is the Next.js Image component
+import Image from "next/image"; 
 import { HeartIcon, SearchIcon, TrolleyIcon, UserIcon, MenuIcon } from "@sanity/icons";
 import {
   DropdownMenu,
@@ -77,9 +77,9 @@ function Header() {
         </Link>
       </nav>
 
-      {/* Right Navigation */}
+      {/* right Navigation */}
       <div className="flex items-center space-x-3">
-        {/* Search Bar */}
+        {/* search Bar */}
         <div className="relative">
           {showSearchBar && (
             <form action="/search" className="absolute top-0 right-8">
@@ -99,12 +99,12 @@ function Header() {
           />
         </div>
 
-        {/* Favorites */}
+        {/* favorites */}
         <Link href="/favorites" aria-label="View Favorites">
           <HeartIcon className="h-8 w-8 text-gray-600" />
         </Link>
 
-        {/* Shopping Cart */}
+       
         <div className="relative">
           <Link href="/basket" aria-label="View Shopping Cart">
             <TrolleyIcon className="h-8 w-8 text-gray-600" />

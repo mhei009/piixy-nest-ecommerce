@@ -24,7 +24,7 @@ const useBasketStore = create<BasketState>()(
             addItem: (product) => set((state) => {
                 const existingItem = state.items.find(item => item.product._id === product._id);
                 if (existingItem) {
-                    // if the item exists, increment its quantity
+                    
                     return {
                         items: state.items.map(item =>
                             item.product._id === product._id

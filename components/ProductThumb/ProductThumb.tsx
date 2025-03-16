@@ -3,6 +3,7 @@ import { Product } from "@/sanity.types";
 import { imageUrl } from "@/lib/imageUrl";
 import Image from "next/image";
 import Link from "next/link";
+import { urlFor } from "@/sanity/lib/image";
 
 
 
@@ -21,7 +22,7 @@ function ProductThumb({ product }: { product: Product }) {
                 {product.image && (
                 <Image 
                 className="object-contain transition-transform duration-300 group-hover:scale-105"
-                src={imageUrl(product.image).url()}
+                src={urlFor(product.image).url()}
                 alt={product.name || "Product Image"}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width:1200px) 50vw, 33vw"

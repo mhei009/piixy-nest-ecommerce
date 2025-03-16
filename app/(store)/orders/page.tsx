@@ -31,7 +31,7 @@ async function Orders() {
                                 key={order.orderNumber}
                                 className="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden"
                             >
-                                {/* Order Number and Status Section */}
+                                {/* order number and order status */}
                                 <div className="p-4 sm:p-6 border-gray-200">
                                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4">
                                         <div>
