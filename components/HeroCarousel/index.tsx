@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Carousel } from "@/sanity.types";
-import Image from "next/image"; // Import Image from Next.js
+import Image from "next/image"; 
 import { urlFor } from "@/sanity/lib/image";
 
 
@@ -15,7 +15,7 @@ interface HeroCarouselProps {
 export default function HeroCarousel({ slides }: HeroCarouselProps) {
   const [current, setCurrent] = useState(0);
 
-  // Auto-slide functionality (every 5 seconds)
+ 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
@@ -23,10 +23,10 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
     return () => clearInterval(interval);
   }, [slides.length]);
 
-  // Manually move to the next slide
+
   const nextSlide = () => setCurrent((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
 
-  // Manually move to the previous slide
+
   const prevSlide = () => setCurrent((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
 
   return (
@@ -43,10 +43,10 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
               className="absolute w-full h-full flex items-center justify-center bg-black/50 text-white"
             >
               <Image
-                src={urlFor(slide.imageUrl).url()} // Generate the image URL using urlFor
+                src={urlFor(slide.imageUrl).url()}
                 alt={slide.title || "Default Alt Text"}
-                layout="fill" // Make sure the image takes full width and height of the parent
-                objectFit="cover" // Ensure the image covers the area properly
+                layout="fill" 
+                objectFit="cover" 
                 className="-z-10"
               />
               <div className="bg-white/20 backdrop-blur-md p-8 rounded-2xl shadow-lg text-center">
