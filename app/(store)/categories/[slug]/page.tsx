@@ -1,6 +1,7 @@
-import ProductsView from "@/components/ProductsView/ProductsView";
-import { getAllCategories } from "@/sanity/lib/products/getAllCategories";
-import { getProductsByCategory } from "@/sanity/lib/products/getProductsByCategory";
+import ProductsView from "../../../../components/ProductsView/ProductsView";
+import { getAllCategories } from "../../../../sanity/lib/products/getAllCategories";
+import { getProductsByCategory } from "../../../../sanity/lib/products/getProductsByCategory";
+
 
 async function CategoryPage(
     { params }: {params: Promise<{slug: string}>}

@@ -1,5 +1,6 @@
-import { COUPON_CODES } from "@/sanity/lib/sale/couponCodes";
-import { getActiveSaleByCouponCode } from "@/sanity/lib/sale/getActiveSaleByCouponCode";
+import { COUPON_CODES } from "../sanity/lib/sale/couponCodes";
+import { getActiveSaleByCouponCode } from "../sanity/lib/sale/getActiveSaleByCouponCode";
+
 
 async function ChristmasBanner() {
   const sale = await getActiveSaleByCouponCode(COUPON_CODES.XMAS24);

@@ -1,10 +1,11 @@
 "use client";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "@/components/ui/button";
+import { Carousel } from "../../sanity.types";
+import { urlFor } from "../../sanity/lib/image";
+import { Button } from "../ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Carousel } from "@/sanity.types";
-import { urlFor } from "@/sanity/lib/image";
+
 
 interface HeroCarouselProps {
   slides: Carousel[];

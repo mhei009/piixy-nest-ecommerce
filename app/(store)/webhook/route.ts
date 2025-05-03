@@ -1,10 +1,13 @@
 
 import { NextRequest, NextResponse } from 'next/server';
-import stripe from '@/lib/stripe'; 
-import { backendClient } from '@/sanity/lib/backendClient';
+
+
 import Stripe from 'stripe';
-import { Metadata } from '@/actions/createCheckoutSession';
+
 import { headers } from "next/headers"
+import { Metadata } from '../../../actions/createCheckoutSession';
+import { backendClient } from '../../../sanity/lib/backendClient';
+import stripe from '../../../lib/stripe';
 
 export async function POST(req: NextRequest) {
     const body = await req.text();

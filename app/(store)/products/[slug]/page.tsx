@@ -1,9 +1,12 @@
-import { imageUrl } from "@/lib/imageUrl";
-import getProductBySlug from "@/sanity/lib/products/getProductBySlug";
+
+
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { PortableText } from "next-sanity";
-import AddToBasketButton from "@/components/AddToBasketButton";
+import AddToBasketButton from "../../../../components/AddToBasketButton";
+import getProductBySlug from "../../../../sanity/lib/products/getProductBySlug";
+import { imageUrl } from "../../../../lib/imageUrl";
+
 
 export const dynamic = "force-dynamic";
 export const revalidate = 60;
@@ -13,7 +16,7 @@ type ProductPageProps = {
 };
 
 export default async function ProductPage({ params }: ProductPageProps) {
-  const { slug } = await params; // ✅ await required here in Next 15
+  const { slug } = await params; 
   const product = await getProductBySlug(slug);
 
   if (!product) {

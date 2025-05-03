@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import "../globals.css";
-import Header from "@/components/Header/Header";
-import Container from "@/components/ui/Container";
+import Container from "../../components/ui/Container";
+import Header from "../../components/Header/Header";
+
 
 export const metadata: Metadata = {
   title: "PixyNest",

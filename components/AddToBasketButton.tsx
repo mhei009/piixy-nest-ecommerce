@@ -1,8 +1,8 @@
 "use client"
 
-import useBasketStore from "@/store/store";
-import { Product } from "@/sanity.types";
 import { useEffect, useState } from "react";
+import useBasketStore from "../store/store";
+import { Product } from "../sanity.types";
 
 interface AddtoBasketButtonProps {
     product: Product;

@@ -13,13 +13,10 @@ import {
 import Link from "next/link";
 import Image from "next/image"; 
 import { HeartIcon, SearchIcon, TrolleyIcon, UserIcon, MenuIcon } from "@sanity/icons";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import useBasketStore from "@/store/store";
+
+
+import {  DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
+import useBasketStore from "../../store/store";
 
 function Header() {
   const { user } = useUser();

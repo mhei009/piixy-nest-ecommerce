@@ -4,11 +4,15 @@ import { useRouter } from "next/navigation";
 import useBasketStore from "../../../store/store";
 import { SignInButton, useAuth, useUser } from "@clerk/nextjs";
 import { useState, useEffect } from "react";
-import AddToBasketButton from "@/components/AddToBasketButton";
-import { imageUrl } from "@/lib/imageUrl";
+
+
 import Image from "next/image";
-import Loader from "@/components/Loader"; 
-import { createCheckoutSession, Metadata } from "@/actions/createCheckoutSession";
+
+import { createCheckoutSession, Metadata } from "../../../actions/createCheckoutSession";
+import Loader from "../../../components/Loader";
+import { imageUrl } from "../../../lib/imageUrl";
+import AddToBasketButton from "../../../components/AddToBasketButton";
+
 
 
 

@@ -3,8 +3,10 @@
 import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import useBasketStore from "@/store/store";
-import { Button } from "@/components/ui/button";
+
+import { Button } from "../../../components/ui/button";
+import useBasketStore from "../../../store/store";
+
 
 function SuccessPage() {
   const searchParams = useSearchParams();

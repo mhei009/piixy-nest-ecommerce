@@ -1,5 +1,7 @@
-import ProductGrid from "@/components/ProductGrid/ProductGrid";
-import { searchProductsByName } from "@/sanity/lib/products/searchProductsByName";
+
+import ProductGrid from "../../../components/ProductGrid/ProductGrid";
+import { searchProductsByName } from "../../../sanity/lib/products/searchProductsByName";
+
 
 type SearchPageProps = {
   searchParams: Promise<{ query: string }>;

@@ -1,10 +1,11 @@
-import ChristmasBanner from "@/components/ChristmasBanner";
-import HeroCarousel from "@/components/HeroCarousel";
-import ProductsView from "@/components/ProductsView/ProductsView";
-import { getAllCarouselSlides } from "@/sanity/lib/hero/getAllCarousel";
 
-import { getAllCategories } from "@/sanity/lib/products/getAllCategories";
-import { getAllProducts } from "@/sanity/lib/products/getAllProducts";
+import ChristmasBanner from "../../components/ChristmasBanner";
+import HeroCarousel from "../../components/HeroCarousel";
+import ProductsView from "../../components/ProductsView/ProductsView";
+import { getAllCarouselSlides } from "../../sanity/lib/hero/getAllCarousel";
+import { getAllCategories } from "../../sanity/lib/products/getAllCategories";
+import { getAllProducts } from "../../sanity/lib/products/getAllProducts";
+
 
 
 export const dynamic = "force-dynamic";

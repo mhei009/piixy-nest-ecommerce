@@ -1,9 +1,10 @@
-import { formatCurrency } from "@/lib/formatCurrency";
-import { imageUrl } from "@/lib/imageUrl";
-import { getMyOrders } from "@/sanity/lib/orders/getMyOrders";
+
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import Image from "next/image";
+import { getMyOrders } from "../../../sanity/lib/orders/getMyOrders";
+import { imageUrl } from "../../../lib/imageUrl";
+import { formatCurrency } from "../../../lib/formatCurrency";
 
 async function Orders() {
     const { userId } = await auth();

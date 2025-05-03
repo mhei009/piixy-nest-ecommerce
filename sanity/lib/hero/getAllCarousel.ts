@@ -1,4 +1,5 @@
-import { Carousel } from "@/sanity.types";
+
+import { Carousel } from "../../../sanity.types";
 import { sanityFetch } from "../live";
 
 

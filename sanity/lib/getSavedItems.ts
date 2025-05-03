@@ -1,5 +1,6 @@
+import { backendClient } from "./backendClient";
 
-import { backendClient } from "@/sanity/lib/backendClient";
+
 
 export async function getSavedItems(userId: string, productId: string, productName: string, productPrice: number, productImage: string) {
   const mutation = {

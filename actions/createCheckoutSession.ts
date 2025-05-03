@@ -1,8 +1,9 @@
 "use server"
 
-import { imageUrl } from "@/lib/imageUrl";
-import stripe from "@/lib/stripe";
-import { BasketItem } from "@/store/store";
+import { imageUrl } from "../lib/imageUrl";
+import stripe from "../lib/stripe";
+import { BasketItem } from "../store/store";
+
 
 export type Metadata = {
     orderNumber: string;
@@ -49,8 +50,8 @@ export async function createCheckoutSession(
         // creates Stripe Checkout session
         const session = await stripe.checkout.sessions.create({
             customer: customerId,
-            customer_creation: customerId ? undefined : "always", // create customer if not found
-            customer_email: !customerId ? metadata.customerEmail : undefined, // only send email if no customer ID
+            customer_creation: customerId ? undefined : "always", 
+            customer_email: !customerId ? metadata.customerEmail : undefined, 
             metadata,
             mode: "payment",
             allow_promotion_codes: true,
