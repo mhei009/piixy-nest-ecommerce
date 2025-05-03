@@ -3,15 +3,17 @@ import getProductBySlug from "@/sanity/lib/products/getProductBySlug";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { PortableText } from "next-sanity";
-
 import AddToBasketButton from "@/components/AddToBasketButton";
 
-async function ProductPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const { slug } = await params;
+export const dynamic = "force-dynamic";
+export const revalidate = 60;
+
+type ProductPageProps = {
+  params: Promise<{ slug: string }>;
+};
+
+export default async function ProductPage({ params }: ProductPageProps) {
+  const { slug } = await params; // ✅ await required here in Next 15
   const product = await getProductBySlug(slug);
 
   if (!product) {
@@ -48,7 +50,7 @@ async function ProductPage({
           <div>
             <h1 className="text-3xl font-bold">{product.name}</h1>
             <div className="text-xl font-semibold mb-4">
-              {product.price?.toFixed(2)}
+              {product.price?.toFixed(2)} SEK
             </div>
             <div className="prose max-w-none mb-6">
               {Array.isArray(product.description) && (
@@ -56,15 +58,12 @@ async function ProductPage({
               )}
             </div>
           </div>
-<div className="mt-3">
-  <AddToBasketButton product={product}  disabled={isOutOfStock}/>
 
-</div>
-          
+          <div className="mt-3">
+            <AddToBasketButton product={product} disabled={isOutOfStock} />
+          </div>
         </div>
       </div>
     </div>
   );
 }
-
-export default ProductPage;
