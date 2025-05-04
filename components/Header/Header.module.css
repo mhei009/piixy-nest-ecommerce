@@ -1,4 +1,4 @@
-/* Header container styling */
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -8,7 +8,7 @@
 
 
 
-/* Navigation links container */
+
 .nav__links {
   display: flex;
   flex-grow: 1;
@@ -16,26 +16,26 @@
   gap: 1.5rem;
 }
 
-/* Individual navigation link styling */
+
 .nav__link {
   font-weight: bold;
-  color: #4a4a4a; /* Gray color */
+  color: #4a4a4a;
   text-decoration: none;
 }
 
-/* Navigation link hover effect */
+
 .nav__link:hover {
-  color: #333; /* Darker gray on hover */
+  color: #333; 
 }
 
-/* Icons container */
+
 .icons__container {
   display: flex;
   gap: 1rem;
   align-items: center;
 }
 
-/* Icon button styling */
+
 .icon__button {
   width: 24px;
   height: 24px;

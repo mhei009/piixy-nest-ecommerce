@@ -48,35 +48,35 @@ function Header() {
 
   return (
     <header className="flex justify-between items-center px-7 py-2">
-      {/* Left side logo */}
+      
       <div className="logo__container">
         <Link href="/">
     
           <Image
             src="/assets/icons/logo-full1.webp"
             alt="PixyNest logo"
-            width={128}   
-            height={40}   
+            width={180}   
+            height={60}   
           />
         </Link>
       </div>
 
-      {/* Center Navigation */}
+
       <nav className="hidden md:flex flex-grow justify-center space-x-6">
-        <Link href="/" className="font-bold" aria-label="New & Featured products">
+        {/* <Link href="/" className="font-bold" aria-label="New & Featured products">
           New & Featured
-        </Link>
-        <Link href="/series" className="font-bold text-gray-700" aria-label="Browse Series">
+        </Link> */}
+        {/* <Link href="/series" className="font-bold text-gray-700" aria-label="Browse Series">
           Series
-        </Link>
-        <Link href="/types" className="font-bold text-gray-700" aria-label="Browse Accessories">
+        </Link> */}
+        {/* <Link href="/types" className="font-bold text-gray-700" aria-label="Browse Accessories">
           Accessories
-        </Link>
+        </Link> */}
       </nav>
 
-      {/* right Navigation */}
+   
       <div className="flex items-center space-x-3">
-        {/* search Bar */}
+       
         <div className="relative">
           {showSearchBar && (
             <form action="/search" className="absolute top-0 right-8">
@@ -96,7 +96,7 @@ function Header() {
           />
         </div>
 
-        {/* favorites */}
+       
         <Link href="/favorites" aria-label="View Favorites">
           <HeartIcon className="h-8 w-8 text-gray-600" />
         </Link>
@@ -113,7 +113,7 @@ function Header() {
           </Link>
         </div>
 
-        {/* User Dropdown */}
+       
         {!isMobile && (
           <ClerkLoaded>
             <SignedIn>
@@ -147,7 +147,7 @@ function Header() {
           </ClerkLoaded>
         )}
 
-        {/* Mobile Menu */}
+       
         <MenuIcon
           className="h-6 w-6 text-gray-600 md:hidden cursor-pointer"
           onClick={() => setShowMobileMenu(!showMobileMenu)}
@@ -155,7 +155,7 @@ function Header() {
         />
       </div>
 
-      {/* Mobile Navigation */}
+
       {showMobileMenu && (
         <div className="absolute top-0 left-0 right-0 bottom-0 bg-white z-50 shadow-md">
           <div className="flex justify-end p-4">
