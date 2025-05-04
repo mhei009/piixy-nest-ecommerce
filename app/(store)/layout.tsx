@@ -3,6 +3,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import "../globals.css";
 import Container from "../../components/ui/Container";
 import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer";
 
 
 export const metadata: Metadata = {
@@ -24,7 +25,9 @@ export default function RootLayout({
                   <Header />
        
               {children}
-            </Container>
+             
+            </Container>  
+            <Footer />
           </main>
         </body>
       </html>

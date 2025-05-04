@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Carousel } from "../../sanity.types";
 import { urlFor } from "../../sanity/lib/image";
-import { Button } from "../ui/button";
+
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 
@@ -28,7 +28,7 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
   const prevSlide = () => setCurrent((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
 
   return (
-    <div className="relative w-full h-[700px] flex items-center justify-center overflow-hidden">
+    <div className="relative w-full h-[700px] mt-3 flex items-center justify-center overflow-hidden">
       <AnimatePresence>
         {slides.map((slide, index) => (
           index === current && (
@@ -49,7 +49,7 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
               <div className="absolute bottom-8 left-0 right-0 p-8 bg-white/20 backdrop-blur-md rounded-2xl shadow-lg text-center">
                 <h1 className="text-3xl font-bold">{slide.title}</h1>
                 <p className="text-lg mt-2">{slide.description}</p>
-                <Button className="mt-4">Learn More</Button>
+      
               </div>
             </motion.div>
           )

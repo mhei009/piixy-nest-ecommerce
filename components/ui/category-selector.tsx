@@ -3,13 +3,15 @@
 
 
 import { useState } from "react";
-import { Check, ChevronsUpDown, Command } from "lucide-react"
+
 import { useRouter } from "next/navigation";
 import { Category } from "../../sanity.types";
 import { Popover, PopoverContent, PopoverTrigger } from "@radix-ui/react-popover";
 import { Button } from "./button";
 import { CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "./command";
 import { cn } from "../../lib/utils";
+import { Check, ChevronsUpDown } from "lucide-react";
+import { Command } from "../../@/components/ui/command";
 
  
 
@@ -44,7 +46,7 @@ return(
         <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
       </Button>
     </PopoverTrigger>
-    <PopoverContent className="w-[200px] p-0">
+    <PopoverContent className="w-[200px] p-0 z-[99]">
       <Command>
       <CommandInput 
   placeholder="Search category..." 
